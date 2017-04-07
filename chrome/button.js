@@ -12,8 +12,10 @@ VaultShortcut = {
 		switch (browser) {
 			case "chrome":
 				exePaths = [
-					"/usr/local/bin/chrome",
-					"/usr/bin/chrome",
+					"/usr/local/bin/google-chrome",
+					"/usr/bin/google-chrome",
+					"/usr/local/bin/chromium",
+					"/usr/bin/chromium",
 					"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
 					"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
 				];
@@ -63,7 +65,9 @@ VaultShortcut = {
 			try {
 				file = new _nsIFile(exePaths[i]);
 				if (file.isFile()) break;
-			} catch (e) {}
+			} catch (e) {
+				file = null;
+			}
 		}
 		
 		if (file === null || !file.isFile()) {
