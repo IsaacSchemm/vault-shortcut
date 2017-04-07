@@ -70,7 +70,7 @@ VaultShortcut = {
 			}
 		}
 		
-		if (file === null || !file.isFile()) {
+		if (file == null || !file.isFile()) {
 			// TODO: show error message and quit
 		}
 		
