@@ -3,10 +3,14 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 .vault-shortcut-button {
-	list-style-image: url("chrome://vault-shortcut/content/button-1.png");
-	-moz-image-region: rect( 0px 24px 24px  0px);
+	list-style-image: url("chrome://vault-shortcut/content/icon.png");
+	-moz-image-region: rect(0px 48px 48px 0px);
 }
-
-[iconsize="small"] .vault-shortcut-button {
-	-moz-image-region: rect( 0px 40px 16px 24px);
+.vault-shortcut-button image {
+	width: 32px;
+	height: 32px;
+}
+[iconsize="small"] .vault-shortcut-button image {
+	width: 16px;
+	height: 16px;
 }
