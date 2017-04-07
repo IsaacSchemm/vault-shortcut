@@ -1,5 +1,15 @@
 <?xml version="1.0" ?>
 <vbox xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-  <setting pref="extensions.vault-shortcut.firefox-path" type="string" title="Path to Firefox executable"/>
-  <setting pref="extensions.vault-shortcut.lastpass-url" type="string" title="Path to LastPass Vault page"/>
+	<setting pref="extensions.vault-shortcut.browser" type="menulist" title="Browser to launch LastPass in">
+		<menulist>
+			<menupopup>
+				<menuitem value="firefox" label="Firefox"/>
+				<menuitem value="ie" label="Internet Explorer"/>
+				<menuitem value="chrome" label="Chrome"/>
+				<menuitem value="vivaldi" label="Vivaldi"/>
+			</menupopup>
+		</menulist>
+	</setting>
+	<setting pref="extensions.vault-shortcut.exe-path" type="string" title="Path to browser executable (optional)"/>
+	<setting pref="extensions.vault-shortcut.lastpass-url" type="string" title="Path to LastPass Vault page (optional)"/>
 </vbox>
