@@ -6,21 +6,33 @@ VaultShortcut = {
 	Launch: function () {
 		var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.vault-shortcut.");
 		
-		var exePath = "", lastPassUrl = "";
+		var exePaths = [], lastPassUrl = "";
 		var browser = prefs.getCharPref("browser");
 		  
 		switch (browser) {
 			case "chrome":
-				exePath = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe";
+				exePaths = [
+					"/usr/local/bin/chrome",
+					"/usr/bin/chrome",
+					"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+					"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
+				];
 				lastPassUrl = "chrome-extension://hdokiejnpimakedhajhdlcegeplioahd/vault.html";
 				break;
 			case "vivaldi":
-				exePath = "C:\\Program Files (x86)\\Vivaldi\\Application\\vivaldi.exe";
+				exePaths = [
+					"/usr/local/bin/vivaldi",
+					"/usr/bin/vivaldi",
+					"C:\\Program Files\\Vivaldi\\Application\\vivaldi.exe",
+					"C:\\Program Files (x86)\\Vivaldi\\Application\\vivaldi.exe",
+				];
 				lastPassUrl = "chrome-extension://hdokiejnpimakedhajhdlcegeplioahd/vault.html";
 				break;
 			case "ie":
-				exePath = "C:\\Program Files (x86)\\Internet Explorer\\iexplore.exe";
-				
+				exePaths = [
+					"C:\\Program Files\\Internet Explorer\\iexplore.exe",
+					"C:\\Program Files (x86)\\Internet Explorer\\iexplore.exe",
+				];
 				var env = Components.classes["@mozilla.org/process/environment;1"].getService(Components.interfaces.nsIEnvironment);
 				var appdata = env.get("USERPROFILE")
 				if (appdata) {
@@ -29,18 +41,37 @@ VaultShortcut = {
 				
 				break;
 			case "firefox":
-			default:
-				exePath = "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe";
+				exePaths = [
+					"/usr/local/bin/firefox",
+					"/usr/bin/firefox",
+					"C:\\Program Files\\Mozilla Firefox\\firefox.exe",
+					"C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe",
+				];
 				lastPassUrl = "resource://support-at-lastpass-dot-com/data/vault.html";
 				break;
 		}
 		
-		exePath = prefs.getCharPref("exe-path") || exePath;
+		if (prefs.getCharPref("exe-path")) {
+			exePaths = [prefs.getCharPref("exe-path")];
+		}
 		lastPassUrl = prefs.getCharPref("lastpass-url") || lastPassUrl;
 		
 		var _nsIFile = Components.Constructor("@mozilla.org/file/local;1", "nsIFile", "initWithPath");
 		var process = Cc["@mozilla.org/process/util;1"].createInstance(Ci.nsIProcess);
-		process.init(new _nsIFile(exePath));
+		
+		var file;
+		for (var i=0; i<exePaths.length; i++) {
+			try {
+				file = new _nsIFile(exePaths[i]);
+				if (file.isFile()) break;
+			} catch (e) {}
+		}
+		
+		if (file === null || !file.isFile()) {
+			// TODO: show error message and quit
+		}
+		
+		process.init(file);
 		var run = "runw" in process ? process.runw : process.run;
 		run.call(process, false, [lastPassUrl], 1);
 	}
