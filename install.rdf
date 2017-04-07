@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+
+  <Description
+    about="urn:mozilla:install-manifest"
+
+    em:name="Vault Shortcut"
+    em:description="A toolbar button for SeaMonkey that opens the LastPass Vault in Firefox."
+    em:creator="Isaac Schemm"
+
+    em:id="vaultshortcut@lakora.us"
+    em:version="0.1.0"
+    em:homepageURL="https://github.com/IsaacSchemm/vaultshortcut"
+
+    em:iconURL="chrome://vaultshortcut/content/icon.png"
+	em:optionsURL="chrome://vaultshortcut/content/options.xul"
+	em:optionsType="2" >
+
+    <em:targetApplication>
+	  <!-- SeaMonkey -->
+	  <Description>
+		<em:id>{92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}</em:id>
+		<em:minVersion>2.46</em:minVersion>
+		<em:maxVersion>*</em:maxVersion>
+	  </Description>
+	</em:targetApplication>
+
+    <em:targetApplication>
+	  <!-- Firefox -->
+	  <Description>
+		<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+		<em:minVersion>49.0</em:minVersion>
+		<em:maxVersion>56.0</em:maxVersion>
+	  </Description>
+	</em:targetApplication>
+
+  </Description>
+
+</RDF>
