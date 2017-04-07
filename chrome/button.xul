@@ -21,10 +21,10 @@
 
 <!-- button details -->
 <toolbarbutton id="vault-shortcut-1"
-  label="LastPass (Firefox)"
-  tooltiptext="Open the LastPass Vault in Firefox (requires you to be logged into LastPass in Firefox)"
+  label="LastPass Vault"
+  tooltiptext="LastPass Vault (External Browser)"
   oncommand="VaultShortcut.Launch()"
-  class="vault-shortcut-button toolbarbutton-1 chromeclass-toolbar-additional"
+  class="vault-shortcut-button chromeclass-toolbar-additional"
   />
 
 </overlay>
