@@ -6,21 +6,27 @@ VaultShortcut = {
 	Launch: function () {
 		var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.vault-shortcut.");
 		
-		var exePath, lastPassUrl;
+		var exePath = "", lastPassUrl = "";
 		var browser = prefs.getCharPref("browser");
-		
+		  
 		switch (browser) {
-			case "vivaldi":
+			case "chrome":
 				exePath = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe";
 				lastPassUrl = "chrome-extension://hdokiejnpimakedhajhdlcegeplioahd/vault.html";
 				break;
-			case "chrome":
+			case "vivaldi":
 				exePath = "C:\\Program Files (x86)\\Vivaldi\\Application\\vivaldi.exe";
 				lastPassUrl = "chrome-extension://hdokiejnpimakedhajhdlcegeplioahd/vault.html";
 				break;
 			case "ie":
 				exePath = "C:\\Program Files (x86)\\Internet Explorer\\iexplore.exe";
-				lastPassUrl = "C:\\Users\\ischemm\\AppData\\LocalLow\\LastPass\\newvault\\vault.html";
+				
+				var env = Components.classes["@mozilla.org/process/environment;1"].getService(Components.interfaces.nsIEnvironment);
+				var appdata = env.get("USERPROFILE")
+				if (appdata) {
+					lastPassUrl = appdata + "\\AppData\\LocalLow\\LastPass\\newvault\\vault.html";
+				}
+				
 				break;
 			case "firefox":
 			default:
