@@ -7,11 +7,11 @@
     about="urn:mozilla:install-manifest"
 
     em:name="Vault Shortcut"
-    em:description="A toolbar button for SeaMonkey that opens the LastPass Vault in Firefox."
+    em:description="Adds a toolbar button that opens the LastPass Vault in an external browser."
     em:creator="Isaac Schemm"
 
     em:id="vault-shortcut@lakora.us"
-    em:version="0.1.3"
+    em:version="0.1.4"
     em:homepageURL="https://github.com/IsaacSchemm/vault-shortcut"
 
     em:iconURL="chrome://vault-shortcut/content/icon.png"

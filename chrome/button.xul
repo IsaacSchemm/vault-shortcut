@@ -21,7 +21,7 @@
 
 <!-- button details -->
 <toolbarbutton id="vault-shortcut-1"
-  label="LastPass Vault"
+  label="Vault"
   tooltiptext="LastPass Vault (External Browser)"
   oncommand="VaultShortcut.Launch()"
   class="vault-shortcut-button chromeclass-toolbar-additional"

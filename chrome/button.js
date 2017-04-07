@@ -57,7 +57,6 @@ VaultShortcut = {
 		lastPassUrl = prefs.getCharPref("lastpass-url") || lastPassUrl;
 		
 		var _nsIFile = Components.Constructor("@mozilla.org/file/local;1", "nsIFile", "initWithPath");
-		var process = Cc["@mozilla.org/process/util;1"].createInstance(Ci.nsIProcess);
 		
 		var file;
 		for (var i=0; i<exePaths.length; i++) {
@@ -71,6 +70,7 @@ VaultShortcut = {
 			// TODO: show error message and quit
 		}
 		
+		var process = Components.classes["@mozilla.org/process/util;1"].createInstance(Components.interfaces.nsIProcess);
 		process.init(file);
 		var run = "runw" in process ? process.runw : process.run;
 		run.call(process, false, [lastPassUrl], 1);
