@@ -8,8 +8,8 @@ Instructions
 ------------
 
 1. Install the extension. You can download it from the SeaMonkey Add-ons site
-(https://addons.mozilla.org/en-US/seamonkey/addon/vaultshortcut) or check the
-[Releases](https://github.com/IsaacSchemm/vaultshortcut/releases) section here
+(https://addons.mozilla.org/en-US/seamonkey/addon/vault-shortcut) or check the
+[Releases](https://github.com/IsaacSchemm/vault-shortcut/releases) section here
 on GitHub for the most recent .xpi file. After you install the extension, you
 will need to restart SeaMonkey.
 

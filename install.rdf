@@ -10,12 +10,12 @@
     em:description="A toolbar button for SeaMonkey that opens the LastPass Vault in Firefox."
     em:creator="Isaac Schemm"
 
-    em:id="vaultshortcut@lakora.us"
+    em:id="vault-shortcut@lakora.us"
     em:version="0.1.0"
-    em:homepageURL="https://github.com/IsaacSchemm/vaultshortcut"
+    em:homepageURL="https://github.com/IsaacSchemm/vault-shortcut"
 
-    em:iconURL="chrome://vaultshortcut/content/icon.png"
-	em:optionsURL="chrome://vaultshortcut/content/options.xul"
+    em:iconURL="chrome://vault-shortcut/content/icon.png"
+	em:optionsURL="chrome://vault-shortcut/content/options.xul"
 	em:optionsType="2" >
 
     <em:targetApplication>

@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
 <vbox xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-  <setting pref="extensions.vaultshortcut.firefox-path" type="string" title="Path to Firefox executable"/>
-  <setting pref="extensions.vaultshortcut.lastpass-url" type="string" title="Path to LastPass Vault page"/>
+  <setting pref="extensions.vault-shortcut.firefox-path" type="string" title="Path to Firefox executable"/>
+  <setting pref="extensions.vault-shortcut.lastpass-url" type="string" title="Path to LastPass Vault page"/>
 </vbox>

@@ -1,2 +1,2 @@
-pref("extensions.vaultshortcut.firefox-path", "");
-pref("extensions.vaultshortcut.lastpass-url", "");
+pref("extensions.vault-shortcut.firefox-path", "");
+pref("extensions.vault-shortcut.lastpass-url", "");

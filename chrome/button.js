@@ -4,7 +4,7 @@
 
 VaultShortcut = {
 	Launch: () => {
-		let prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.vaultshortcut.");
+		let prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.vault-shortcut.");
 		
 		let firefoxPath = prefs.getCharPref("firefox-path") || "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe";
 		let lastPassUrl = prefs.getCharPref("lastpass-url") || "resource://support-at-lastpass-dot-com/data/vault.html";
