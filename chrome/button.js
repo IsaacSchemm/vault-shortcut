@@ -14,6 +14,8 @@ VaultShortcut = {
 				exePaths = [
 					"/usr/local/bin/google-chrome",
 					"/usr/bin/google-chrome",
+					"/usr/local/bin/chromium-browser",
+					"/usr/bin/chromium-browser",
 					"/usr/local/bin/chromium",
 					"/usr/bin/chromium",
 					"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
