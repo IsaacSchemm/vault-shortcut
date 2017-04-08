@@ -31,8 +31,11 @@ Known Bugs
 Preset application paths are not implemented for macOS, so Mac users will need
 to define the path to the browser executable manually for now.
 
-Note
-----
+Notes
+-----
 
-This extension is not created by, affiliated with, or endorsed by LastPass,
+* The LastPass Vault will only load if you are already signed into LastPass in
+external browser you have chosen. If you see a gray LastPass logo on a white
+background for more than a few seconds, check to see if you're signed in.
+* This extension is not created by, affiliated with, or endorsed by LastPass,
 Mozilla, or the SeaMonkey or Pale Moon projects.

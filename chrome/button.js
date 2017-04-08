@@ -71,7 +71,17 @@ VaultShortcut = {
 		}
 		
 		if (file == null || !file.isFile()) {
-			// TODO: show error message and quit
+			var title = "Vault Shortcut";
+			var message = "The selected browser could not be found. Please check the Vault Shortcut settings in Add-on Manager.";
+			try {
+				Components.classes['@mozilla.org/alerts-service;1']
+					.getService(Components.interfaces.nsIAlertsService)
+					.showAlertNotification(null, title, message, false, '', null);
+			} catch (e) {
+				Components.classes["@mozilla.org/embedcomp/prompt-service;1"]
+					.getService(Components.interfaces.nsIPromptService)
+					.alert(null, title, message);
+			}
 		}
 		
 		var process = Components.classes["@mozilla.org/process/util;1"].createInstance(Components.interfaces.nsIProcess);
