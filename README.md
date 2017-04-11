@@ -25,12 +25,6 @@ side of the SeaMonkey or Pale Moon window, and click Customize. Then find the
 Vault icon in the list of options and drag it onto one of the toolbars. Press
 Done to save your changes.
 
-Known Bugs
-----------
-
-Preset application paths are not implemented for macOS, so Mac users will need
-to define the path to the browser executable manually for now.
-
 Notes
 -----
 
