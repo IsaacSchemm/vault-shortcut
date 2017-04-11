@@ -58,7 +58,21 @@ VaultShortcut = {
 				break;
 		}
 		
-		var os=Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULRuntime).OS;
+		var showNotFoundMessage = function () {
+			var title = "Vault Shortcut";
+			var message = "The selected browser could not be found. Please check the Vault Shortcut settings in Add-on Manager.";
+			try {
+				Components.classes['@mozilla.org/alerts-service;1']
+					.getService(Components.interfaces.nsIAlertsService)
+					.showAlertNotification(null, title, message, false, '', null);
+			} catch (e) {
+				Components.classes["@mozilla.org/embedcomp/prompt-service;1"]
+					.getService(Components.interfaces.nsIPromptService)
+					.alert(null, title, message);
+			}
+		};
+		
+		var os = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULRuntime).OS;
 		var _nsIFile = Components.Constructor("@mozilla.org/file/local;1", "nsILocalFile", "initWithPath");
 		var exePathPref = prefs.getCharPref("exe-path");
 		
@@ -67,8 +81,13 @@ VaultShortcut = {
 			if (openExe.isFile()) {
 				var process = Components.classes["@mozilla.org/process/util;1"].createInstance(Components.interfaces.nsIProcess);
 				process.init(openExe);
-				var run = "runw" in process ? process.runw : process.run;
-				run.call(process, false, ["-b", macBundleId, "--args", lastPassUrl], 4);
+				process.runwAsync(["-b", macBundleId, "--args", lastPassUrl], 4, {
+					observe: function (subject, topic, data) {
+						if (topic == "process-failed" || subject.exitValue != 0) {
+							showNotFoundMessage();
+						}
+					}
+				});
 				return;
 			}
 		}
@@ -89,22 +108,11 @@ VaultShortcut = {
 		}
 		
 		if (file == null || !file.isFile()) {
-			var title = "Vault Shortcut";
-			var message = "The selected browser could not be found. Please check the Vault Shortcut settings in Add-on Manager.";
-			try {
-				Components.classes['@mozilla.org/alerts-service;1']
-					.getService(Components.interfaces.nsIAlertsService)
-					.showAlertNotification(null, title, message, false, '', null);
-			} catch (e) {
-				Components.classes["@mozilla.org/embedcomp/prompt-service;1"]
-					.getService(Components.interfaces.nsIPromptService)
-					.alert(null, title, message);
-			}
+			showNotFoundMessage();
 		} else {
 			var process = Components.classes["@mozilla.org/process/util;1"].createInstance(Components.interfaces.nsIProcess);
 			process.init(file);
-			var run = "runw" in process ? process.runw : process.run;
-			run.call(process, false, [lastPassUrl], 1);
+			process.runw(false, [lastPassUrl], 1);
 		}
 	}
 }
