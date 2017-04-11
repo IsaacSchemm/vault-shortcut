@@ -6,7 +6,7 @@ VaultShortcut = {
 	Launch: function () {
 		var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.vault-shortcut.");
 		
-		var exePaths = [], lastPassUrl = "";
+		var exePaths = [], macBundleId = "", lastPassUrl = "";
 		var browser = prefs.getCharPref("browser");
 		  
 		switch (browser) {
@@ -21,6 +21,7 @@ VaultShortcut = {
 					"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
 					"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
 				];
+				macBundleId = "com.google.Chrome";
 				lastPassUrl = "chrome-extension://hdokiejnpimakedhajhdlcegeplioahd/vault.html";
 				break;
 			case "vivaldi":
@@ -30,6 +31,7 @@ VaultShortcut = {
 					"C:\\Program Files\\Vivaldi\\Application\\vivaldi.exe",
 					"C:\\Program Files (x86)\\Vivaldi\\Application\\vivaldi.exe",
 				];
+				macBundleId = "com.vivaldi.Vivaldi";
 				lastPassUrl = "chrome-extension://hdokiejnpimakedhajhdlcegeplioahd/vault.html";
 				break;
 			case "ie":
@@ -51,16 +53,30 @@ VaultShortcut = {
 					"C:\\Program Files\\Mozilla Firefox\\firefox.exe",
 					"C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe",
 				];
+				macBundleId = "org.mozilla.firefox";
 				lastPassUrl = "resource://support-at-lastpass-dot-com/data/vault.html";
 				break;
 		}
 		
-		if (prefs.getCharPref("exe-path")) {
-			exePaths = [prefs.getCharPref("exe-path")];
+		var os=Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULRuntime).OS;
+		var _nsIFile = Components.Constructor("@mozilla.org/file/local;1", "nsILocalFile", "initWithPath");
+		var exePathPref = prefs.getCharPref("exe-path");
+		
+		if (os == "Darwin" && macBundleId && !exePathPref) {
+			var openExe = new _nsIFile("/usr/bin/open");
+			if (openExe.isFile()) {
+				var process = Components.classes["@mozilla.org/process/util;1"].createInstance(Components.interfaces.nsIProcess);
+				process.init(openExe);
+				var run = "runw" in process ? process.runw : process.run;
+				run.call(process, false, ["-b", macBundleId, "--args", lastPassUrl], 4);
+				return;
+			}
+		}
+		
+		if (exePathPref) {
+			exePaths = [exePathPref];
 		}
 		lastPassUrl = prefs.getCharPref("lastpass-url") || lastPassUrl;
-		
-		var _nsIFile = Components.Constructor("@mozilla.org/file/local;1", "nsILocalFile", "initWithPath");
 		
 		var file;
 		for (var i=0; i<exePaths.length; i++) {
